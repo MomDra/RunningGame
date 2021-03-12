@@ -150,7 +150,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0644b83839978814ea2ccbd6212c178d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 727201733}
+  Player: {fileID: 727201738}
+  CoinPrefab: {fileID: 3365672850791937557, guid: e83e468be3c03444eb36e4f8a549e603,
+    type: 3}
   LastPos: -5
   LastScale: 10
   MaxScale: 10
@@ -400,9 +402,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf684017f711b5947ac364a604356b61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gm: {fileID: 394188936}
   MoveSpeed: 5
   JumpPower: 500
-  JumpCount: 3
+  JumpCount: 2
 --- !u!1 &1413258314
 GameObject:
   m_ObjectHideFlags: 0
