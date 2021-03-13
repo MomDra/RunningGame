@@ -8,6 +8,6 @@ public class Camera : MonoBehaviour
     GameObject Player;
     private void LateUpdate()
     {
-        transform.position = new Vector3(Player.transform.position.x, 1, -10);
+        transform.position = new Vector3(Player.transform.position.x + 5, 1, -10);
     }
 }

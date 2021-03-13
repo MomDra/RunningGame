@@ -23,6 +23,7 @@ public class GroundManager : MonoBehaviour
 
     public int MaxYpos { get => MaxYPos; }
     public float Lastpos { set { LastPos = value; } }
+    public int Lastscale { set { LastScale = value; } }
    
 
     [SerializeField]
@@ -39,7 +40,7 @@ public class GroundManager : MonoBehaviour
         // 새로운 바닥을 생성
         if(Player.transform.position.x + 20 >= LastPos + LastScale * 0.5f)
         {
-            int newScale = Random.Range(3, MaxScale);
+            int newScale = Random.Range(2, MaxScale);
             float newX = LastPos + LastScale * 0.5f + newScale * 0.5f + Random.Range(3, 5);
             GameObject ground = new GameObject("Ground");
             ground.AddComponent<BoxCollider2D>();

@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     int gamejumpcount;
 
     Rigidbody2D Myrigid;
+    Animator Myani;
 
     bool isDie = false;
     public bool isdie{ get => isDie; }
@@ -26,6 +27,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         Myrigid = GetComponent<Rigidbody2D>();
+        Myani = GetComponent<Animator>();
         gamejumpcount = JumpCount;
     }
 
@@ -45,6 +47,7 @@ public class Player : MonoBehaviour
             Myrigid.velocity = Vector2.zero;
             Myrigid.AddForce(new Vector2(0, JumpPower));
             gamejumpcount--;
+            Myani.SetBool("Jump", true);
         }
 
         if(transform.position.y < -gm.MaxYpos - 5)
@@ -52,6 +55,7 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(-9.45f, 0, 0);
             isDie = true;
             gm.Lastpos = -5;
+            gm.Lastscale = 10;
         }
 
     }
@@ -59,5 +63,6 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         gamejumpcount = JumpCount;
+        Myani.SetBool("Jump", false);
     }
 }
