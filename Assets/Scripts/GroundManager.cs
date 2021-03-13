@@ -27,8 +27,11 @@ public class GroundManager : MonoBehaviour
    
 
     [SerializeField]
-    Sprite GroundSprite;
-
+    GameObject GroundSprite;
+    [SerializeField]
+    GameObject LeftGroundSprite;
+    [SerializeField]
+    GameObject RightGroundSprite;
 
     private void Update()
     {
@@ -38,34 +41,46 @@ public class GroundManager : MonoBehaviour
     void MakeGround()
     {
         // 새로운 바닥을 생성
-        if(Player.transform.position.x + 20 >= LastPos + LastScale * 0.5f)
+        if(Player.transform.position.x + 20 > LastPos + LastScale)
         {
             int newScale = Random.Range(2, MaxScale);
-            float newX = LastPos + LastScale * 0.5f + newScale * 0.5f + Random.Range(3, 5);
-            GameObject ground = new GameObject("Ground");
-            ground.AddComponent<BoxCollider2D>();
-            ground.AddComponent<SpriteRenderer>();
-            DestoryGround dg = ground.AddComponent<DestoryGround>();
-            dg.setPlayer(Player);
-            SpriteRenderer sr = ground.GetComponent<SpriteRenderer>();
-            sr.sprite = GroundSprite;
-
+            float newX = LastPos + LastScale + Random.Range(3, 6);
             LastYpos = Random.Range(-MaxYPos, MaxYPos);
-            ground.transform.position = new Vector3(newX, LastYpos, 0);
-            ground.transform.localScale = new Vector3(newScale, 1, 1);
+            //ground.transform.position = new Vector3(newX, LastYpos, 0);
+            //ground.transform.localScale = new Vector3(newScale, 1, 1);
 
-            LastPos = newX;
-            LastScale = newScale;
+            for(int i = 0; i<newScale; i++)
+            {
+                GameObject go;
+
+                if(i == 0)
+                {
+                    go = Instantiate(LeftGroundSprite);
+                }
+                else if(i == newScale - 1)
+                {
+                    go = Instantiate(RightGroundSprite);
+                }
+                else
+                {
+                    go = Instantiate(GroundSprite);
+                }
+                DestoryGround dg = go.AddComponent<DestoryGround>();
+                dg.setPlayer(Player);
+                go.transform.position = new Vector3(newX + i, LastYpos, 0);
+            }
 
             // 코인 생성
-            for(int i = 0; i<LastScale; i++)
+            for (int i = 0; i < newScale; i++)
             {
                 GameObject coin = GameObject.Instantiate(CoinPrefab);
                 Coin co = coin.AddComponent<Coin>();
                 co.setPlayer(Player);
-                coin.transform.position = ground.transform.position + Vector3.up;
-                coin.transform.position += Vector3.right * (i + 0.5f) + Vector3.left * LastScale * 0.5f;
+                coin.transform.position = new Vector3(newX + i, LastYpos, 0) + Vector3.up;
             }
+
+            LastPos = newX;
+            LastScale = newScale;
         }
     }
 }

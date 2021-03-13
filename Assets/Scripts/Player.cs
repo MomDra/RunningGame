@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
         {
             transform.position = new Vector3(-9.45f, 0, 0);
             isDie = true;
-            gm.Lastpos = -5;
+            gm.Lastpos = -10;
             gm.Lastscale = 10;
         }
 
