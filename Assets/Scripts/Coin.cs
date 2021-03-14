@@ -28,6 +28,7 @@ public class Coin : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        GameMana.CurrentScore += 1;
         Destroy(gameObject);
     }
 }

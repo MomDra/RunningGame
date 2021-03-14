@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -52,10 +53,7 @@ public class Player : MonoBehaviour
 
         if(transform.position.y < -gm.MaxYpos - 5)
         {
-            transform.position = new Vector3(-9.45f, 0, 0);
-            isDie = true;
-            gm.Lastpos = -10;
-            gm.Lastscale = 10;
+            SceneManager.LoadScene("UIScene");
         }
 
     }
